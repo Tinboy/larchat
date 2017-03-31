@@ -1,0 +1,47 @@
+.chat-place{
+    height:300px;
+    overflow: auto;
+}
+.input-message{
+    height: 60px;
+}
+.message-submit{
+    margin-top: 27px;
+    line-height: 40px;
+}
+.user-img-chat{
+    margin: 2px 9px 0px 5px;
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+}
+.msg-head-wrapper{
+    margin-left: 44px;
+    height: 14px;
+    width: auto;
+    overflow: hidden;
+}
+.msg-body-wrapper{
+    margin-top: 3px;
+    margin-left: 6px;
+    font-size: 15px;
+    word-wrap: break-word;
+    max-height: 90px;
+    overflow: hidden;
+}
+.nick-wrapper{
+    cursor: pointer;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    color: rgb(59, 89, 152);
+}
+.time-wrapper{
+    margin-top: 1px;
+    float: left;
+    color: rgb(137, 137, 137);
+    font-weight: normal;
+    font-size: 9px;
+    margin-left: 3px;
+}
