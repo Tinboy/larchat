@@ -25,6 +25,6 @@ Route::group(['prefix' => 'ws'], function(){
 
 
 Route::get('/chat', 'ChatController@index');
-Route::post('chat/sendMessage', 'ChatController@send');
+Route::post('chat/sendMessage', 'MessagesController@create');
 Route::get('/login', 'SteamAuthController@login');
 Route::get('/logout', 'SteamAuthController@logout');

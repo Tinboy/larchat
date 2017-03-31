@@ -2,19 +2,15 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Message;
 use App\User;
 
 class SendMessage implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use SerializesModels;
 
     public $message, $user;
     /**
@@ -28,7 +24,6 @@ class SendMessage implements ShouldBroadcast
         $this->message = (object)NULL;
         $this->message->body = $message->body;
         $this->message->created_at = $message->created_at->setTimezone('Europe/Moscow')->toTimeString();
-
         $this->user = $user;
     }
 

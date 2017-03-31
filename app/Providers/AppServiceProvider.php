@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('\App\Services\ChatService', function () {
-            return new \App\Services\ChatService();
+        $this->app->bind(ChatService::class, function () {
+            return new ChatService();
         });
     }
 }

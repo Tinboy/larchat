@@ -16,18 +16,20 @@
                         {{ csrf_field() }}
                     <div class="form-group">
                     <div class="well chat-place" id="chat-div">
+
                         @if($messages)
                             @foreach($messages as $message)
                                 <img src="{{ $message->user->avatar }}" class="user-img-chat">
                                 <div class="msg-head-wrapper">
                                     <div class="nick-wrapper">
-                                        <a target="_blank" href="http://steamcommunity.com/profiles/{{ $message->user->steamid }}">{{ $message->user->username }}</a>
+                                        <a target="_blank" href="{{ $message->user->link() }}">{{ $message->user->username }}</a>
                                         </div>
                                     <div class="time-wrapper">({{$message->create_time}})</div>
                                     </div>
                                 <div class="msg-body-wrapper">{{ $message->body }}</div>
                             @endforeach
                         @endif
+
                     </div>
                     </div>
                         <div class="form-group">

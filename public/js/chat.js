@@ -27,10 +27,14 @@
     //Функция ,делающая сообщение по шаблону
     function make_msg(req_obj){
        return '<img src="' + req_obj.user.avatar + '" class="user-img-chat"> ' +
-        '<div class="msg-head-wrapper"><div class="nick-wrapper"><a target="_blank" href="http://steamcommunity.com/profiles/'+req_obj['user']['steamid']+'">'
+        '<div class="msg-head-wrapper">' +
+           '<div class="nick-wrapper">' +
+           '<a target="_blank" href="http://steamcommunity.com/profiles/'+req_obj['user']['steamid']+'">'
         +req_obj.user.username+"</a>" +
-        '</div><div class="time-wrapper">(' + req_obj.message.created_at+')' +
-        '</div></div><div class="msg-body-wrapper">' + req_obj.message.body + '</div>';
+        '</div>' +
+           '<div class="time-wrapper">(' + req_obj.message.created_at+')</div>' +
+           '</div>' +
+           '<div class="msg-body-wrapper">' + req_obj.message.body + '</div>';
     }
 
 
