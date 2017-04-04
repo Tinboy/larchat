@@ -21,9 +21,9 @@ class SendMessage implements ShouldBroadcast
     public function __construct(Message $message, User $user)
     {
 
-        $this->message = (object)NULL;
+        $this->message = (object)[];
         $this->message->body = $message->body;
-        $this->message->created_at = $message->created_at->setTimezone('Europe/Moscow')->toTimeString();
+        $this->message->created_at = $message->created_at->toTimeString();
         $this->user = $user;
     }
 

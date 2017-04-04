@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
-use Illuminate\Contracts\Auth\Factory as AuthCont;
+use Illuminate\Contracts\Auth\Guard as AuthCont;
 
 class SteamAuthController extends Controller
 {
@@ -31,20 +31,25 @@ class SteamAuthController extends Controller
         if (!$this->steam->validate()) {
             return $this->steam->redirect(); // redirect to Steam login page
         }
-            $info = $this->steam->getUserInfo();
-            if (!is_null($info)) {
-                $user = User::where('steamid', $info->steamID64)->first();
-                    $user = User::updateOrCreate(
-                        ['steamid'  => $info->steamID64],
-                        [
-                        'username' => $info->personaname,
-                        'avatar'   => $info->avatarfull
-                        ]);
-
-                $this->auth->login($user, true);
-
-                return redirect('/'); // redirect to site
-            }
+        $info = $this->steam->getUserInfo();
+        if (is_null($info)) {
+            return "Oooops! Something happened!";
         }
 
-    }
+        $user = User::updateOrCreate(
+            ['steamid' => $info->steamID64],
+            [
+                'username' => $info->personaname,
+                'avatar' => $info->avatarfull
+            ]);
+
+        $this->auth->login($user, true);
+
+        return redirect('/'); // redirect to site
+
+    }//endlogin
+
+}//endclass
+
+
+

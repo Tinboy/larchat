@@ -7,61 +7,49 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-3 chat-wrapper">
             <div class="panel panel-default">
-                <div class="panel-heading">Chat</div>
+                <div class="panel-heading">Chat
+                    <div class="pull-right">
+                        <span class="online-counter"></span>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                </div>
 
-                <div class="panel-body">
-                    <form>
+                <div>
+                    <form class="chat-from">
                         {{ csrf_field() }}
-                    <div class="form-group">
-                    <div class="well chat-place" id="chat-div">
+                        <div>
+                            <div class="chat-place" id="chat-div">
 
                         @if($messages)
                             @foreach($messages as $message)
+                                <div class="chat-msg">
                                 <img src="{{ $message->user->avatar }}" class="user-img-chat">
                                 <div class="msg-head-wrapper">
                                     <div class="nick-wrapper">
                                         <a target="_blank" href="{{ $message->user->link() }}">{{ $message->user->username }}</a>
                                         </div>
-                                    <div class="time-wrapper">({{$message->create_time}})</div>
+                                    <div class="time-wrapper">({{$message->created_at->toTimeString()}})</div>
                                     </div>
                                 <div class="msg-body-wrapper">{{ $message->body }}</div>
+                                </div>
                             @endforeach
                         @endif
 
                     </div>
                     </div>
-                        <div class="form-group">
-                           <div class="col-md-10">
-                               <label for="message" class="control-label">Message:</label>
-                                <input id="message" type="text" class="form-control message-input" name="message" autocomplete="off">
+                        <div>
+                           <div>
+                                <input id="message" type="text" class="form-control message-input" name="message" placeholder="Писать здесь" autocomplete="off">
 
                            </div>
-                            <input type="submit" class="message-submit btn btn-primary col-md-2" value="Submit">
-                        </div>
                     </form>
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-            <div class="panel-heading">Users</div>
-
-            <div class="panel-body">
-                Visitors online: <span class="online-counter"></span>
-            </div>
-
     </div>
+</div>
 </div>
 @endsection
 

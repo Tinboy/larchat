@@ -2,24 +2,18 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Message;
-use App\User;
-
 
 class  ChatController extends Controller
 {
-    protected $auth, $service, $message, $user;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(User $user,Message $message)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->message = $message;
         $this->middleware('auth');
     }
 
@@ -30,17 +24,7 @@ class  ChatController extends Controller
      */
     public function index()
     {
-        $messages = $this->message->orderBy('id', 'desc')->get();
-
-        if(count($messages) < 5 ){
-            return view('chat');
-        }
-
-        $messages = $messages->take(5)->reverse();
-        foreach ($messages as $message)
-        {
-            $message->create_time = $message->created_at->setTimezone('Europe/Moscow')->toTimeString();
-        }
+        $messages = Message::latest()->take(5)->get()->reverse();
         return view('chat')->withMessages($messages);
     }
 

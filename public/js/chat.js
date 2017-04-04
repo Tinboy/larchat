@@ -67,7 +67,7 @@
     $(document).ready(function(){
         var request;
 
-        $('.message-submit').on('click', function(e){
+        $('.chat-from').submit(function(e){
             //Отменяем сабмит формы
             e.preventDefault();
 

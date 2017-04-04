@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,5 +27,5 @@ Route::group(['prefix' => 'ws'], function(){
 
 Route::get('/chat', 'ChatController@index');
 Route::post('chat/sendMessage', 'MessagesController@create');
-Route::get('/login', 'SteamAuthController@login');
+Route::get('/login', 'SteamAuthController@login')->name('login');
 Route::get('/logout', 'SteamAuthController@logout');

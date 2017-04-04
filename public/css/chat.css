@@ -1,13 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+
+.chat-msg{
+    padding: 2px;
+}
+.chat-wrapper{
+    font-family: "Roboto";
+}
 .chat-place{
+    padding:12px;
+    margin:0;
     height:300px;
     overflow: auto;
 }
-.input-message{
-    height: 60px;
+input#message{
+    height: 40px;
+    border: 0;
+    border-top: 1px solid #888;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
 }
 .message-submit{
-    margin-top: 27px;
-    line-height: 40px;
+    margin-left: -18px;
+    position: absolute;
+    margin-top: 25px;
+    line-height: 21px;
+    border-radius: 0px 5px 5px 0px;
 }
 .user-img-chat{
     margin: 2px 9px 0px 5px;
@@ -17,15 +36,17 @@
     border-radius: 2px;
 }
 .msg-head-wrapper{
+    font-family: "Lato";
     margin-left: 44px;
     height: 14px;
     width: auto;
     overflow: hidden;
 }
 .msg-body-wrapper{
+    font-family: "Roboto";
     margin-top: 3px;
     margin-left: 6px;
-    font-size: 15px;
+    font-size: 13px;
     word-wrap: break-word;
     max-height: 90px;
     overflow: hidden;
