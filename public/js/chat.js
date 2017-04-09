@@ -1,8 +1,9 @@
+   "use strict";
     //Подрубаем сокеты
     var socket = io('http://localhost:8000');
 
 
-    socket.on('newMes', function(response){
+    socket.on('newMes', (response) =>{
         console.log(response);
 
         //append в блок с сообщениями
@@ -10,23 +11,26 @@
 
 
         // Скоррлим блок до нижнего сообщения
-        var chatObj = document.getElementById("chat-div");
+       let chatObj = document.getElementById("chat-div");
         chatObj.scrollTop = chatObj.scrollHeight;
     });
 
-
-    socket.on('online', function(data){
+    socket.on("newItem", (result) => {
+        addDeposit(result.user,result.items);
+    });
+    socket.on('online', (data) =>{
         $('.online-counter').html(data);
     });
 
-    socket.on('error', function(error){
+    socket.on('error', (error) =>{
         console.warn('Error', error);
     });
 
     ///// MAKE_MSG_FUNC /////
     //Функция ,делающая сообщение по шаблону
     function make_msg(req_obj){
-       return '<img src="' + req_obj.user.avatar + '" class="user-img-chat"> ' +
+       return '<div class="chat-msg">' +
+           '<img src="' + req_obj.user.avatar + '" class="user-img-chat"> ' +
         '<div class="msg-head-wrapper">' +
            '<div class="nick-wrapper">' +
            '<a target="_blank" href="http://steamcommunity.com/profiles/'+req_obj['user']['steamid']+'">'
@@ -34,9 +38,33 @@
         '</div>' +
            '<div class="time-wrapper">(' + req_obj.message.created_at+')</div>' +
            '</div>' +
-           '<div class="msg-body-wrapper">' + req_obj.message.body + '</div>';
+           '<div class="msg-body-wrapper">' + req_obj.message.body + '</div></div>';
     }
 
+    function addDeposit(user,items){
+        $('.dep-container').prepend('<div class="dep-wrapper">' +
+            '<div class="dep-head">' +
+            '<img class="user-avatar-img" src="' + user.avatar + '">' + user.name +
+            '</div>' +
+            '<hr>' +
+            '<div class="items-wrapper">'+
+                addItems(items)+
+            '</div>'+
+                '</div>');
+
+    }
+    function addItems(items) {
+        let html = "";
+        for(let item of items){
+            html += '<div class="dep-item" item-name="'+ item.name+'">'+
+            '<img class="dep-item-img" src="' + item.url + '">' +
+            '<div class="item-price">'+item.price+
+                    '</div>'+
+            '</div>';
+
+        }
+        return html;
+    }
 
     ///// END_MAKE_MSG_FUNC  /////
 
@@ -45,17 +73,17 @@
     //Функция всплывающего окошка
     function alert_src(type, mes){
         //Функция, создающая сообщ. по шаблону
-        var mes_templ = function(class_name, in_mes){
+        let mes_templ = (class_name, in_mes) =>{
             return "<div class='alert fly_alert alert-" +
             class_name + "'>" +
             in_mes + "</div>";
         };
         //Отправляем на странцу алерт
         $("body").append(mes_templ(type, mes));
-            setTimeout(function(){
+            setTimeout(() =>{
                 //Скрываем алерт
                 $(".fly_alert").fadeOut("slow");
-            setTimeout(function () {
+            setTimeout( () =>{
                 //Удаляем алерт
                 $(".fly_alert").remove();
             },1000);
@@ -64,10 +92,10 @@
     ///// END_ALERT_FUNC /////
 
 
-    $(document).ready(function(){
+    $(document).ready(() =>{
         var request;
 
-        $('.chat-from').submit(function(e){
+        $('.chat-from').submit((e) =>{
             //Отменяем сабмит формы
             e.preventDefault();
 
@@ -81,12 +109,12 @@
             });
 
             //Все ок
-            request.done(function() {
+            request.done(() => {
                 $('.message-input').val('');
             });
 
             //Все плохо)
-            request.fail(function(jqXHR) {
+            request.fail( (jqXHR) =>{
                 alert_src("danger" , jqXHR.responseJSON.message);
             });
 

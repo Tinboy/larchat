@@ -7,6 +7,18 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="col-md-9">
+            <a target="_blank" href="https://steamcommunity.com/tradeoffer/new/?partner=389357914">
+            <div class="btn btn-lg btn-success">
+                 DEPOSIT
+            </div>
+            </a>
+            <hr>
+            <div class="dep-container">
+
+            </div>
+
+        </div>
         <div class="col-md-3 chat-wrapper">
             <div class="panel panel-default">
                 <div class="panel-heading">Chat
@@ -48,6 +60,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 </div>
@@ -55,7 +68,7 @@
 
 @section('view-scripts')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-
+            <script src="js/notify.min.js"></script>
             <script src="js/chat.js"></script>
 
     @endsection
